@@ -1,0 +1,50 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark background-navbar-color">
+  <!-- <a class="navbar-brand" href="#"><strong>Navbar</strong></a> -->
+  <%= link_to "Logo", root_path, class: "navbar-brand", id: "logo" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Profile</a>
+      </li>
+    </ul>
+    <!-- <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown user user-menu">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <%#= image_tag((current_user.image), class: "user-image") %>
+          <span class="hidden-xs"><%#= current_user.username %></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li class="user-header">
+            <%#= image_tag((current_user.image), class: "img-circle") %>
+            <p>
+              <%#= current_user.username %>
+              <small>Joined <%#= time_ago_in_words(current_user.created_at) %> ago</small>
+            </p>
+          </li>
+          <li class="user-footer">
+            <div class="pull-left">
+              <%#= link_to "Profile", user_path(current_user), class: "btn btn-default btn-flat" %>
+            </div>
+            <div class="pull-right">
+              <%#= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-default btn-flat" %>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul> -->
+  </div>
+</nav>
