@@ -1,0 +1,8 @@
+<% current_user.products.each do |product| %>
+  <%= product.p_name %>
+  <%= product.p_price %>
+  <%= product.p_description %>
+  <% product.images.each do |image| %>
+    <%= image_tag(image) %>
+  <% end %>
+<% end %>

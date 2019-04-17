@@ -1,0 +1,20 @@
+<div class="row" id="comment-<%= comment.id %>">
+  <div class="col-md-2">
+    <section class="user_info center">
+      <%= image_tag((comment.user.image), class: "comment-user-image") %>
+    </section>
+  </div>
+  <div class="col-md-8 well">
+    <p><%= comment.c_description %></p>
+    <% if user_signed_in? && current_user == comment.user %>
+      <p class="pull-right">  <%= link_to "Delete", user_product_comment_path(comment.user,@product,comment), method: :delete,
+        remote: true, data: { confirm: "Are you sure you want to delete?" } %></p>
+      <div id="edit-comment-<% comment.id %>">
+        <p class="pull-right"><%= link_to "Edit", edit_user_product_comment_path(current_user,@product,comment), remote: true %></p>
+      </div
+    <% end %>
+    <p>
+      <span class="quiet"><small>Created: <%= time_ago_in_words(comment.created_at) %> ago by <%= comment.user.name %></small></span>
+    </p>
+  </div>
+</div>

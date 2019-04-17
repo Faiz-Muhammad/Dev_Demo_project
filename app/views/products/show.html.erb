@@ -1,0 +1,102 @@
+<div class="container-fluid">
+  <div class="content-wrapper">
+		<div class="item-container">
+			<div class="container">
+				<div class="col-md-12">
+					<div class="product col-md-3 service-image-left">
+						<center>
+              <%= image_tag((@product.images.first), class: "img", id: "item-display") %>
+						</center>
+					</div>
+					<div class="container service1-items col-sm-2 col-md-2 pull-left">
+						<center>
+							<a id="item-1" class="service1-item">
+                <%= image_tag((@product.images.second), class: "img") %>
+              </a>
+							<a id="item-2" class="service1-item">
+                <%= image_tag((@product.images.third), class: "img") %>
+              </a>
+						</center>
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="product-title"><%= @product.p_name %></div>
+					<div class="product-desc"><%= @product.p_description.split('.').first %></div>
+					<hr>
+					<div class="product-price"><%= @product.p_price %></div>
+					<div class="product-stock"></div>
+					<hr>
+					<div class="btn-group cart">
+						<button type="button" class="btn btn-success">
+							Add to cart
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid pull-left">
+			<div class="col-md-12 product-info">
+				<ul id="myTab" class="nav nav-tabs nav_tabs">
+					<li class="active"><a href="#service-one" data-toggle="tab" class="button-design">DESCRIPTION</a></li>
+					<li><a href="#service-two" data-toggle="tab" class="button-design">Comments</a></li>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade in active" id="service-one">
+						<section class="container product-info">
+						  <%= @product.p_description %>
+							<h3><%= @product.p_name %>'s Features</h3>
+							<% @product.p_description.split('.').each do |feature| %>
+                <li><%= feature %>.</li>
+              <% end %>
+						</section>
+					</div>
+					<div class="tab-pane fade" id="service-two">
+						<section class="container">
+              <% if user_signed_in? %>
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <%= form_for([current_user, @product, @comment], remote: true, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+                      <div class="form-group">
+                        <br>
+                        <div class="col-md-8">
+                          <%= f.text_area :c_description, rows: 8, class: "form-control", placeholder: "Enter Comment Here" %>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                          <%= f.submit "Submit Comment", class: "btn btn-primary btn-lg btn-xlarge button-design" %>
+                        </div>
+                      </div>
+                    <% end %>
+                    <hr />
+                  </div>
+                </div>
+              <% end %>
+              <% if @product.comments != 0 %>
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <br>
+                    <% if !user_signed_in?%>
+                      <h5>For commenting, you have to <%= link_to 'Sign in', new_user_session_path %> first. </h5>
+                      <hr />
+                    <% end %>
+                    <div id="messages">
+                      <%= render partial: 'comments/comments', object: @comments %>
+                    </div>
+                  </div>
+                </div>
+              <% else %>
+                <div class="row">
+                  <div class="col-md-8 col-md-offset-2">
+                    <h3>No Comments Yet!</h3>
+                  </div>
+                </div>
+              <% end %>
+            </section>
+					</div>
+				</div>
+				<hr>
+			</div>
+		</div>
+	</div>
+</div>

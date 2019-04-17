@@ -1,0 +1,19 @@
+<div class="container-fluid well span6">
+  <div align="center">
+    <div class="row-fluid">
+      <div class="span2" >
+        <%= image_tag((current_user.image), class:"avatar img-circle img-thumbnail") %>
+      </div>
+      <div class="span8">
+        <h3>Name: <%= current_user.name %></h3>
+        <h6>Email: <%= current_user.email %></h6>
+        <h6>Phone Number: <%= current_user.phone_number %></h6>
+        <h6>Address: <%= current_user.address %></h6>
+      </div>
+      <div class="span2">
+        <%= link_to "Edit your profile", edit_user_registration_path, class: "btn button-design" %>
+        <%= link_to "Back", :back , class: "button-design btn" %>
+      </div>
+    </div>
+  </div>
+</div>

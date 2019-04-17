@@ -1,0 +1,13 @@
+<%= form_for([current_user, @product, @comment], remote: true, :html => {class: "form-horizontal", role: "form"}) do |f| %>
+  <div class="row">
+    <div class="col-md-2">
+      <section class="user_info center">
+        <%= image_tag((@comment.user.image), class: "comment-user-image") %>
+      </section>
+    </div>
+    <div class="col-md-8 well">
+      <p><%= f.text_area :c_description, autofocus: true, autocomplete: "c_description", class: "form-control" %></p>
+      <p><%= f.submit "Update", class: "button-design" %> <%= link_to "Back", :back, class: "btn button-design" %></p>
+    </div>
+  </div>
+<% end %>

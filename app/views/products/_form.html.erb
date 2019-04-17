@@ -1,0 +1,34 @@
+<%= form_for [current_user,@product] do |f| %>
+  <div class="form">
+    <% if @product.p_name.nil? %>
+      <h2>Add Product</h2>
+    <% else %>
+      <h2>Edit Product</h2>
+    <% end %>
+    <label>
+      <%= f.text_field :p_name, autofocus: true, autocomplete: 'p_name', placeholder: 'Product Name', class: 'input' %>
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </label><br />
+    <label>
+      <%= f.text_field :p_price, autofocus: true, autocomplete: 'p_price', placeholder: "Product's Price", class: 'input' %>
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </label><br />
+    <label>
+      <%= f.text_area :p_description, autofocus: true, autocomplete: "p_description", placeholder: "Product's description", class: 'input' %>
+      <div class="line-box">
+        <div class="line"></div>
+      </div>
+    </label><br />
+    <label>
+      <%= f.label :images %>
+      <%= f.file_field :images, multiple: true %>
+    </label><br /><br />
+    <div class="actions">
+      <%= f.submit(@product.new_record? ? "Create my account" : "Update my account", class: "btn button-design") %> <%= link_to "Back", :back, class: "btn button-design" %>
+    </div>
+  </div>
+<% end %>
